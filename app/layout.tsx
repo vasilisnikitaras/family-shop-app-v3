@@ -28,8 +28,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
 
       <body>
-        <div className="app-wrapper w-full max-w-2xl mx-auto px-3">
 
+        {/*
+          OLD VERSION (max-w-2xl)
+          - Πολύ μεγάλο για κινητό
+          - Κάνει την οθόνη να μεγαλώνει / κάνει zoom
+          - Το κρατάμε για ιστορικό, δεν το σβήνουμε
+        */}
+        {/* <div className="app-wrapper w-full max-w-2xl mx-auto px-3"></div> */}
+
+        {/*
+          NEW VERSION (max-w-md)
+          - Ιδανικό για κινητό
+          - Δεν κάνει zoom
+          - Δεν ξεχειλώνει
+          - Κρατάει το app centered και καθαρό
+        */}
+        <div className="app-wrapper w-full max-w-md mx-auto px-3">
           {children}
         </div>
 

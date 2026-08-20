@@ -209,3 +209,59 @@ html, body {
   width: 100%;
   max-width: 500px;
 }
+
+/* 
+  STEP 3 — Mobile Input Fix
+  - Σταματάει το input να μεγαλώνει
+  - Σταματάει το zoom όταν γράφεις
+  - Κάνει όλα τα inputs full-width στο κινητό
+*/
+input, select, textarea {
+  width: 100%;
+  max-width: 100%;
+  font-size: 16px; /* Prevents mobile zoom */
+  box-sizing: border-box;
+}
+
+/* 
+  STEP 4 — Mobile Button Fix
+  - Κάνει όλα τα buttons full-width στο κινητό
+  - Σταματάει το σπάσιμο του layout
+  - Σταματάει το περίεργο zoom όταν πατάς κουμπί
+*/
+/*
+button {
+  width: 100%;
+  max-width: 100%;
+  font-size: 16px; 
+  box-sizing: border-box;
+}
+*/
+
+/* 
+  STEP 5 — Store Section Mobile Fix
+  - Σταματάει τα store boxes (Atlantis, PA, κλπ) να ξεχειλώνουν
+  - Κάνει όλα τα sections full-width στο κινητό
+  - Σταματάει το overflow των items
+  - Κρατάει το layout καθαρό και σταθερό
+*/
+.store-section {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+.store-section {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.list-item {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+

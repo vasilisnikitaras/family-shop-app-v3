@@ -877,7 +877,8 @@ for (let i = 0; i < tail.length; i++) {
               if (storeItems.length === 0) return null;
 
               return (
-                <div key={store.id} className="card space-y-3">
+
+                <div key={store.id} className="card space-y-3 store-section">
 
                   <h2 className="text-xl font-bold text-purple-700 dark:text-purple-300 pt-1 pb-1">
                     {store.name}
@@ -973,7 +974,7 @@ for (let i = 0; i < tail.length; i++) {
               {items.map((i: any) => (
                 <li
                   key={i.id}
-                  className={`card list-item px-4 py-3 transition-all pointer-events-auto ${
+                  className={`card list-item px-4 py-3 transition-all pointer-events-auto flex items-start gap-3 ${
                     i.is_checked && "bg-green-100 dark:bg-green-900"
                   }`}
                 >

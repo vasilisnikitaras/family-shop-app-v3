@@ -445,11 +445,12 @@ const handleVoiceAdd = async (item: any) => {
   };
 
   for (let i = 0; i < words.length; i++) {
-    if (!isNaN(words[i])) {
-      quantity = parseInt(words[i], 10);
-      qtyIndex = i;
-      break;
-    }
+    if (!isNaN(Number(words[i]))) {
+  quantity = parseInt(words[i], 10);
+  qtyIndex = i;
+  break;
+}
+
     if (numMap[words[i]]) {
       quantity = numMap[words[i]];
       qtyIndex = i;

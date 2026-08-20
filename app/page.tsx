@@ -427,7 +427,8 @@ const clean = (str: string) =>
     .replace(/[^a-zA-Zα-ωΑ-Ω0-9\s]/g, "")
     .trim();
 
-const handleVoiceAdd = async (item) => {
+const handleVoiceAdd = async (item: any) => {
+
   console.log("VOICE ITEM:", item);
 
   let spokenRaw = item.text || "";

@@ -436,16 +436,16 @@ const handleVoiceAdd = async (item: any) => {
   let words = spoken.split(/\s+/).filter(Boolean);
 
   // 1️⃣ Quantity
-  let quantity = 1;
-  let qtyIndex = -1;
+let quantity = 1;
+let qtyIndex = -1;
 
-  const numMap = {
-    one: 1, two: 2, three: 3, four: 4, five: 5,
-    six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
-  };
+const numMap = {
+  one: 1, two: 2, three: 3, four: 4, five: 5,
+  six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
+};
 
- for (let i = 0; i < words.length; i++) {
-  const w = words[i]; // ⭐ βοηθάει το TS να καταλάβει τον τύπο
+for (let i = 0; i < words.length; i++) {
+  const w = words[i];
 
   if (!isNaN(Number(w))) {
     quantity = parseInt(w, 10);
@@ -454,17 +454,20 @@ const handleVoiceAdd = async (item: any) => {
   }
 }
 
+for (let i = 0; i < words.length; i++) {
+  const w = words[i];
 
-    if (numMap[words[i]]) {
-      quantity = numMap[words[i]];
-      qtyIndex = i;
-      break;
-    }
+  if (numMap[w]) {
+    quantity = numMap[w];
+    qtyIndex = i;
+    break;
   }
+}
 
-  if (qtyIndex !== -1) {
-    words.splice(qtyIndex, 1);
-  }
+if (qtyIndex !== -1) {
+  words.splice(qtyIndex, 1);
+}
+
 
   // 2️⃣ Store from tail
   const tail = words.slice(-3);

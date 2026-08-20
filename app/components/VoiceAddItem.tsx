@@ -18,22 +18,23 @@ export default function VoiceAddItem({ stores, onAdd }: any) {
 
 
   // 🔥 STORE ALIASES — ΟΛΑ ΤΑ ΜΑΓΑΖΙΑ
-  const storeAliases = {
-    "super-c": [
-      "super-c", "super c", "superc", "super see",
-      "super sea", "super ci", "super si", "super ce"
-    ],
-    pa: ["pa", "p a", "πα", "πa", "pah"],
-    atlantis: ["atlantis", "atl", "atlan", "atlantas"],
-    metro: [
-      "metro", "meto", "metroh", "μετρο", "μετρό",
-      "to metro", "tu metro", "metrw", "metrw store"
-    ],
-    fanes: ["fanes", "φάνες", "fane", "faness"],
-    iga: ["iga", "ίγκα", "iga store", "iga supermarket"],
-    walmart: ["walmart", "wal mart", "wallmart"],
-    "βασιλόπουλος": ["βασιλόπουλος", "vasilopoulos", "vassilopoulos"]
-  };
+  const storeAliases: Record<string, string[]> = {
+  "super-c": [
+    "super-c", "super c", "superc", "super see",
+    "super sea", "super ci", "super si", "super ce"
+  ],
+  pa: ["pa", "p a", "πα", "πa", "pah"],
+  atlantis: ["atlantis", "atl", "atlan", "atlantas"],
+  metro: [
+    "metro", "meto", "metroh", "μετρο", "μετρό",
+    "to metro", "tu metro", "metrw", "metrw store"
+  ],
+  fanes: ["fanes", "φάνες", "fane", "faness"],
+  iga: ["iga", "ίγκα", "iga store", "iga supermarket"],
+  walmart: ["walmart", "wal mart", "wallmart"],
+  "βασιλόπουλος": ["βασιλόπουλος", "vasilopoulos", "vassilopoulos"]
+};
+
 
   function normalizeStore(text: any) {
 

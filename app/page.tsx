@@ -457,12 +457,13 @@ for (let i = 0; i < words.length; i++) {
 for (let i = 0; i < words.length; i++) {
   const w = words[i];
 
-  if (numMap[w]) {
-    quantity = numMap[w];
+  if (numMap[w as keyof typeof numMap]) {
+    quantity = numMap[w as keyof typeof numMap];
     qtyIndex = i;
     break;
   }
 }
+
 
 if (qtyIndex !== -1) {
   words.splice(qtyIndex, 1);

@@ -162,7 +162,8 @@ export default function VoiceAddItem({ stores, onAdd }: any) {
     const recorder = new MediaRecorder(newStream);
     setMediaRecorder(recorder);
 
-    const chunks = [];
+    const chunks: Blob[] = [];
+
     recorder.ondataavailable = e => chunks.push(e.data);
 
     recorder.onstop = async () => {

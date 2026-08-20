@@ -420,7 +420,8 @@ const storeAliases = {
 // --------------------------------------
 // VOICE ADD ITEM (FINAL VERSION — TAIL FUZZY) 🔥
 // --------------------------------------
-const clean = (str) =>
+const clean = (str: string) =>
+
   str
     .toLowerCase()
     .replace(/[^a-zA-Zα-ωΑ-Ω0-9\s]/g, "")

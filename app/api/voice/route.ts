@@ -3,12 +3,21 @@ import OpenAI from "openai";
 
 export const runtime = "nodejs";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-});
+// Only create client if key exists (local)
+const client = process.env.OPENAI_API_KEY
+  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  : null;
 
 export async function POST(req: Request) {
   try {
+    // If no key → disable voice on production
+    if (!client) {
+      return NextResponse.json(
+        { error: "Voice transcription disabled (no OPENAI_API_KEY)" },
+        { status: 200 }
+      );
+    }
+
     const formData = await req.formData();
     const blob = formData.get("file") as Blob;
 
@@ -28,12 +37,7 @@ export async function POST(req: Request) {
     const response = await client.audio.transcriptions.create({
       file,
       model: "whisper-1",
-      language: "en",   // OK
-
-      // ❌ task: "transcribe"
-      // Το νέο Whisper API δεν το υποστηρίζει πλέον.
-      // Το αφήνουμε εδώ ως comment για ιστορικό.
-      // task: "transcribe",
+      language: "en",
     });
 
     return NextResponse.json({ text: response.text });

@@ -849,17 +849,18 @@ for (let i = 0; i < tail.length; i++) {
       </button>
 
       {/* 🎤 VOICE BUTTON */}
-      <VoiceAddItem
-        stores={stores.map((s: any) => s.name)}
-        onAdd={(item) => {
-          setNewItemName(item.name);
-          setNewItemQty(item.quantity);
-          setNewItemStore(
-            stores.find((s: any) => s.name.toLowerCase() === item.store.toLowerCase())?.id || ""
-          );
-          addItem();
-        }}
-      />
+<VoiceAddItem
+  stores={stores.map((s: any) => s.name)}
+  onAdd={(item: any) => {
+    setNewItemName(item.name);
+    setNewItemQty(item.quantity);
+    setNewItemStore(
+      stores.find((s: any) => s.name.toLowerCase() === item.store.toLowerCase())?.id || ""
+    );
+    addItem();
+  }}
+/>
+
     </div>
   </div>
 </div>

@@ -48,7 +48,8 @@ export default function VoiceAddItem({ stores, onAdd }: any) {
   }
 
   // 🔥 PRODUCT ALIASES — ΟΛΑ ΤΑ ΠΡΟΪΟΝΤΑ
-  const productAliases = {
+  const productAliases: Record<string, string[]> = {
+
     coffee: [
       "coffee", "greek coffee", "καφές",
       "papagalos", "παπαγάλος",

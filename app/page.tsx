@@ -471,14 +471,16 @@ if (qtyIndex !== -1) {
 
 
   // 2️⃣ Store from tail
-  const tail = words.slice(-3);
-  const combos = [];
+ // 2️⃣ Store from tail
+const tail = words.slice(-3);
+const combos: string[] = [];
 
-  for (let i = 0; i < tail.length; i++) {
-    for (let j = i; j < tail.length; j++) {
-      combos.push(tail.slice(i, j + 1).join(" "));
-    }
+for (let i = 0; i < tail.length; i++) {
+  for (let j = i; j < tail.length; j++) {
+    combos.push(tail.slice(i, j + 1).join(" "));
   }
+}
+
 
   let storeObj = stores.find((s) => {
   const name = clean(s.name).replace(/-/g, " ");

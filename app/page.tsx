@@ -113,7 +113,8 @@ export default function Page() {
   }, [familyCode]);
 
   // ⭐⭐⭐⭐⭐ FIXED — CLEAN VERSION
-  async function handleSaveEdit(updated) {
+  async function handleSaveEdit(updated: any) {
+
     const family_code = localStorage.getItem("family_code");
 
     const res = await postJSON("/api/editItem", {

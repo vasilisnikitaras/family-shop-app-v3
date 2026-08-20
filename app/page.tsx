@@ -444,12 +444,16 @@ const handleVoiceAdd = async (item: any) => {
     six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
   };
 
-  for (let i = 0; i < words.length; i++) {
-    if (!isNaN(Number(words[i]))) {
-  quantity = parseInt(words[i], 10);
-  qtyIndex = i;
-  break;
+ for (let i = 0; i < words.length; i++) {
+  const w = words[i]; // ⭐ βοηθάει το TS να καταλάβει τον τύπο
+
+  if (!isNaN(Number(w))) {
+    quantity = parseInt(w, 10);
+    qtyIndex = i;
+    break;
+  }
 }
+
 
     if (numMap[words[i]]) {
       quantity = numMap[words[i]];

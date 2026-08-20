@@ -1,0 +1,32 @@
+{
+  "title": "Family Shopping List",
+
+  "enter_code": "Enter Family Code",
+  "family_code": "Family code...",
+  "enter_password": "Enter Password",
+  "password": "Password...",
+  "your_name": "Your Name...",
+  "join_family": "Join Family",
+
+  "new_store": "New store name...",
+  "add_store": "Add Store",
+  "manage_stores": "Manage Stores",
+  "close": "Close",
+
+  "add_product": "Add product...",
+  "quantity": "Quantity",
+  "select_store": "Select store",
+  "add": "Add",
+
+  "edit_item": "Edit Item",
+  "save": "Save",
+  "cancel": "Cancel",
+
+  "got_it": "Got it",
+  "delete": "Delete",
+  "edit": "Edit",
+
+  "store_view": "Store View",
+  "list_view": "List View",
+  "added_by": "Added by"
+}

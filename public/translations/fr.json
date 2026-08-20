@@ -1,0 +1,32 @@
+{
+  "title": "Liste de courses familiale",
+
+  "enter_code": "Entrez le code famille",
+  "family_code": "Code famille...",
+  "enter_password": "Entrez le mot de passe",
+  "password": "Mot de passe...",
+  "your_name": "Votre nom...",
+  "join_family": "Rejoindre la famille",
+
+  "new_store": "Nom du nouveau magasin...",
+  "add_store": "Ajouter un magasin",
+  "manage_stores": "Gérer les magasins",
+  "close": "Fermer",
+
+  "add_product": "Ajouter un produit...",
+  "quantity": "Quantité",
+  "select_store": "Sélectionner un magasin",
+  "add": "Ajouter",
+
+  "edit_item": "Modifier l'article",
+  "save": "Enregistrer",
+  "cancel": "Annuler",
+
+  "got_it": "Pris",
+  "delete": "Supprimer",
+  "edit": "Modifier",
+
+  "store_view": "Vue par magasin",
+  "list_view": "Vue liste",
+  "added_by": "Ajouté par"
+}

@@ -1,0 +1,32 @@
+{
+  "title": "家庭购物清单",
+
+  "enter_code": "输入家庭代码",
+  "family_code": "家庭代码...",
+  "enter_password": "输入密码",
+  "password": "密码...",
+  "your_name": "你的名字...",
+  "join_family": "加入家庭",
+
+  "new_store": "新商店名称...",
+  "add_store": "添加商店",
+  "manage_stores": "管理商店",
+  "close": "关闭",
+
+  "add_product": "添加商品...",
+  "quantity": "数量",
+  "select_store": "选择商店",
+  "add": "添加",
+
+  "edit_item": "编辑商品",
+  "save": "保存",
+  "cancel": "取消",
+
+  "got_it": "完成",
+  "delete": "删除",
+  "edit": "编辑",
+
+  "store_view": "商店视图",
+  "list_view": "列表视图",
+  "added_by": "添加者"
+}

@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* BASE BODY */
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: auto;
+  font-family: system-ui, sans-serif;
+  background-color: #FAF7FB;
+  color: #3A2E3F;
+}
+
+.dark {
+  background-color: #0b0b0b;
+  color: #f5f5f5;
+}
+
+/* INPUTS */
+.input,
+.input-qty {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  color: #3A2E3F;
+}
+
+.input-qty {
+  text-align: center;
+}
+
+.dark .input,
+.dark .input-qty {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #f5f5f5;
+}
+
+/* SELECT */
+.select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  color: #3A2E3F;
+}
+
+.dark .select {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #f5f5f5;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-purple {
+  background: #C8A2C8;
+  color: #3A2E3F;
+}
+
+.btn-purple:hover {
+  background: #B48EB4;
+}
+
+.btn-light-purple {
+  background: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1px solid #e9d5ff !important;
+}
+
+.btn-light-purple:hover {
+  background: #ede3ff !important;
+}
+
+.btn-danger {
+  background: #ff4d4d !important;
+  color: white !important;
+  border: 1px solid #cc0000 !important;
+}
+
+.btn-danger:hover {
+  background: #ff6666 !important;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  border: 1px solid #e6e6e6;
+  max-width: 600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark .card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+}
+
+.card.list-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+}
+
+/* ACTION ICON */
+.action-icon {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  border-radius: 50%;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+.dark .action-icon {
+  background: #2a2a2a;
+  border: 1px solid #444;
+}
+
+/* SETTINGS BUTTON */
+.settings-btn {
+  margin-left: 12px;
+  padding: 12px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SAFE AREA */
+:root {
+  --safe-top: env(safe-area-inset-top);
+}
+
+.pt-safe {
+  padding-top: calc(var(--safe-top) + 12px);
+}
+
+/* MOBILE FONT */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* MODAL OVERLAY — ONLY FOR STORE MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* STORE MODAL */
+.store-modal-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+/* ⭐ EDIT MODAL — ONLY THIS ONE BLOCK */
+.edit-modal-card {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  background: white;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
+  width: 100%;
+  max-width: 500px;
+}

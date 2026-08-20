@@ -1,0 +1,32 @@
+{
+  "title": "Familieneinkaufsliste",
+
+  "enter_code": "Familiencode eingeben",
+  "family_code": "Familiencode...",
+  "enter_password": "Passwort eingeben",
+  "password": "Passwort...",
+  "your_name": "Ihr Name...",
+  "join_family": "Familie beitreten",
+
+  "new_store": "Neuer Geschäftsname...",
+  "add_store": "Geschäft hinzufügen",
+  "manage_stores": "Geschäfte verwalten",
+  "close": "Schließen",
+
+  "add_product": "Produkt hinzufügen...",
+  "quantity": "Menge",
+  "select_store": "Geschäft auswählen",
+  "add": "Hinzufügen",
+
+  "edit_item": "Artikel bearbeiten",
+  "save": "Speichern",
+  "cancel": "Abbrechen",
+
+  "got_it": "Erledigt",
+  "delete": "Löschen",
+  "edit": "Bearbeiten",
+
+  "store_view": "Geschäftsansicht",
+  "list_view": "Listenansicht",
+  "added_by": "Hinzugefügt von"
+}

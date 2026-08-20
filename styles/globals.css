@@ -1,0 +1,1364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* BASE BODY */
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: auto;
+  font-family: system-ui, sans-serif;
+  background-color: #FAF7FB;
+  color: #3A2E3F;
+}
+
+/* THEMES */
+.dark {
+  background-color: #0b0b0b;
+  color: #f5f5f5;
+}
+
+/* INPUTS */
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  color: #3A2E3F;
+}
+
+.dark .input {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #f5f5f5;
+}
+
+/* SELECT */
+.select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  color: #3A2E3F;
+}
+
+.dark .select {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #f5f5f5;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-purple {
+  background: #C8A2C8;
+  color: #3A2E3F;
+}
+
+.btn-purple:hover {
+  background: #B48EB4;
+}
+
+.btn-light-purple {
+  background: #F7C6D0;
+  color: #3A2E3F;
+}
+
+/* CARD — FIXED & PREMIUM */
+:root {
+  --card-bg: #ffffff;
+}
+
+:root.dark {
+  --card-bg: #1e1e1e;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 14px;
+  border: none !important;     /* ❗ ΤΕΛΟΣ η άσπρη κορνίζα */
+  display: flex;
+  flex-direction: column;
+}
+
+/* LIST ITEM FIX — CENTERED */
+.card.list-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;          /* ❗ Κεντράρισμα */
+}
+
+/* INPUT QTY */
+.input-qty {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  background: white;
+  color: #3A2E3F;
+  text-align: center;
+}
+
+.dark .input-qty {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #f5f5f5;
+}
+
+/* FOCUS */
+.input:focus,
+.input-qty:focus,
+.select:focus {
+  border-color: #C8A2C8;
+  box-shadow: 0 0 0 2px rgba(200,162,200,0.25);
+}
+
+/* MOBILE FONT */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* SAFE AREA */
+:root {
+  --safe-top: env(safe-area-inset-top);
+}
+
+.pt-safe {
+  padding-top: calc(var(--safe-top) + 12px);
+}
+
+/* ACTION ICONS */
+.action-icon {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  border-radius: 50%;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+/* PRODUCT ACTIONS */
+.product-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* SETTINGS BUTTON */
+.settings-btn {
+  margin-left: 12px;
+  padding: 12px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.dark .card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a; /* λεπτό border για να φαίνεται */
+}
+
+
+.card.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e6e6e6;
+}
+
+.dark .card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+}
+
+.action-icon {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+}
+
+.dark .action-icon {
+  background: #2a2a2a;
+  border: 1px solid #444;
+}
+.card.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.btn-danger {
+  background: #ff4d4d !important;
+  color: white !important;
+  border: 1px solid #cc0000 !important;
+}
+
+.btn-danger:hover {
+  background: #ff6666 !important;
+}
+.btn-light-purple {
+  background: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1px solid #e9d5ff !important;
+}
+
+.btn-light-purple:hover {
+  background: #ede3ff !important;
+}
+.modal-card .card {
+  background: white !important;
+  border: 1px solid #e6e6e6 !important;
+}
+
+.dark .modal-card .card {
+  background: #1e1e1e !important;
+  border: 1px solid #333 !important;
+}
+
+
+
+
+.modal-card .btn-danger {
+  background: #ff4d4d !important;
+  color: white !important;
+  border: 1px solid #cc0000 !important;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.card.list-item {
+  margin-bottom: 10px;
+}
+
+.card {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.space-y-6 > .card {
+  margin-top: 10px;
+}
+
+.card.list-item {
+  margin-bottom: 12px;
+}
+
+.store-section {
+  margin-bottom: 25px;
+}
+.space-y-6 > .card {
+  margin-bottom: 25px;
+}
+.card {
+  display: block !important;
+  max-width: 600px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/*
+@layer components {
+  .card {
+    @apply w-full max-w-md mx-auto rounded-xl p-4 shadow-md;
+  }
+}
+*/
+/*
+@layer components {
+  .card {
+    @apply w-full max-w-xs mx-auto rounded-xl p-6 shadow-xl;
+  }
+}
+*/
+
+/* PREMIUM CARD — NO APPLY, NO LAYER */
+.card {
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.dark .card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+}
+
+/* MAKE MANAGE STORES LOOK IDENTICAL TO ONLINE */
+
+/* Card container */
+.card.list-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 16px !important;
+  margin-bottom: 10px !important;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+}
+
+/* Dark mode */
+.dark .card.list-item {
+  background: #1e1e1e;
+  border: 1px solid #333;
+}
+
+/* Store name text */
+.card.list-item .store-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3A2E3F;
+}
+
+.dark .card.list-item .store-name {
+  color: #f5f5f5;
+}
+
+/* Delete button */
+.card.list-item button {
+  background: #ff4d4d !important;
+  color: white !important;
+  border: 1px solid #cc0000 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+}
+
+.card.list-item button:hover {
+  background: #ff6666 !important;
+}
+
+
+/* MAKE MANAGE STORES IDENTICAL TO ONLINE */
+.card.list-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 16px !important;
+  margin-bottom: 12px !important;
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+}
+
+.dark .card.list-item {
+  background: #1e1e1e;
+  border: 1px solid #333;
+}
+
+/* Store name text */
+.card.list-item span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #3A2E3F;
+}
+
+.dark .card.list-item span {
+  color: #f5f5f5;
+}
+
+.card.list-item button {
+    color: #fff !important;
+/*  background: #ff4d4d !important; */
+    border: 1px solid #c00 !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+}
+
+
+/* SOFT PREMIUM BUTTONS — CLEAN, NOT TOO STRONG */
+.card.list-item button {
+  color: #ffffff !important;
+  background: #8fd694 !important;      /* soft green */
+  border: 1px solid #6bb57a !important; /* soft border */
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+.card.list-item button:hover {
+  background: #7ccf85 !important;      /* slightly darker on hover */
+}
+
+
+/* PERFECT SOFT-PREMIUM BUTTONS — SAME STYLE FOR ALL 3 */
+.action-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+/* GOT IT — light soft green */
+.action-btn.gotit {
+  background: #d9f5dd !important;       /* light green */
+  border: 1px solid #b4e6c0 !important;  /* soft border */
+  color: #2f7a2f !important;             /* calm green text */
+}
+.action-btn.gotit:hover {
+  background: #c9efcf !important;
+}
+
+/* EDIT — soft blue (premium, calm) */
+.action-btn.edit {
+  background: #e3edff !important;        /* light blue */
+  border: 1px solid #c3d7ff !important;
+  color: #2f5fbf !important;
+}
+.action-btn.edit:hover {
+  background: #d4e4ff !important;
+}
+
+/* DELETE — soft red (όχι αίμα, όχι έντονο) */
+.action-btn.delete {
+  background: #f9dede !important;        /* soft red */
+  border: 1px solid #e7bcbc !important;
+  color: #b82a2a !important;             /* calm red */
+}
+.action-btn.delete:hover {
+  background: #f3d2d2 !important;
+}
+
+/* PERFECT SOFT-PREMIUM BUTTONS — SAME STYLE FOR ALL 3 */
+.action-icon {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 26px !important;
+  font-weight: 600 !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+/* GOT IT — light soft green */
+.action-icon.gotit {
+  background: #e6f7ea !important;       /* light green */
+  border: 1px solid #c8e9cf !important;
+  color: #2f7a2f !important;
+}
+.action-icon.gotit:hover {
+  background: #d8f2de !important;
+}
+
+/* EDIT — soft blue */
+.action-icon.edit {
+  background: #e8f0ff !important;        /* light blue */
+  border: 1px solid #cddcff !important;
+  color: #2f5fbf !important;
+}
+.action-icon.edit:hover {
+  background: #dbe7ff !important;
+}
+
+/* DELETE — soft red (όχι αίμα, όχι έντονο) */
+.action-icon.delete {
+  background: #fbeaea !important;        /* soft red */
+  border: 1px solid #e8c7c7 !important;
+  color: #b82a2a !important;
+}
+.action-icon.delete:hover {
+  background: #f4dede !important;
+}
+
+/* FIX: Bring Manage Stores section up */
+.manage-stores-section {
+  margin-top: 20px !important;
+  padding-top: 10px !important;
+}
+
+/* FIX: Reduce spacing from product list */
+.item-row {
+  margin-bottom: 8px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+/* FIX MANAGE STORES MODAL SPACING */
+.modal-card {
+  background: var(--card-bg);
+  padding: 20px !important;
+  border-radius: 12px !important;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* FIX STORE LIST ITEMS */
+.modal-card .card {
+  padding: 12px 16px !important;
+  border-radius: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* FIX DELETE BUTTON INSIDE MODAL */
+.modal-card .btn-danger {
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+}
+/* BASE STYLE — ALL BUTTONS LIGHT GREY */
+.action-icon {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  background: #e6e6e6 !important;      /* light grey */
+  border: 1px solid #d2d2d2 !important; /* soft grey border */
+  color: #333 !important;               /* calm dark */
+  transition: 0.15s ease-in-out !important;
+}
+
+/* GOT IT — tiny soft green tint */
+.action-icon.gotit {
+  background: #e9eee9 !important;       /* grey with 5% green */
+  border-color: #d7ded7 !important;
+  color: #2f6a3f !important;            /* calm green text */
+}
+.action-icon.gotit:hover {
+  background: #e3e9e3 !important;
+}
+
+/* EDIT — tiny soft blue tint */
+.action-icon.edit {
+  background: #eaedf2 !important;       /* grey with 5% blue */
+  border-color: #d8dce3 !important;
+  color: #2f4f7a !important;            /* calm blue text */
+}
+.action-icon.edit:hover {
+  background: #e4e8ee !important;
+}
+
+/* DELETE — tiny soft red tint */
+.action-icon.delete {
+  background: #f2eaea !important;       /* grey with 5% red */
+  border-color: #e0d4d4 !important;
+  color: #7a2f2f !important;            /* calm red text */
+}
+.action-icon.delete:hover {
+  background: #ece4e4 !important;
+}
+
+/* BASE BUTTON STYLE — SAME FOR ALL */
+.action-icon {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  background: #f0f0f0 !important;        /* LIGHT GREY */
+  border: 1px solid #d6d6d6 !important;  /* SOFT GREY BORDER */
+  color: #444 !important;                /* calm dark */
+  transition: 0.15s ease-in-out !important;
+}
+
+/* GOT IT — tiny green tint ONLY on text */
+.action-icon.gotit {
+  color: #2f7a3f !important;             /* calm green */
+}
+
+/* EDIT — tiny blue tint ONLY on text */
+.action-icon.edit {
+  color: #2f4f7a !important;             /* calm blue */
+}
+
+/* DELETE — tiny red tint ONLY on text */
+.action-icon.delete {
+  color: #7a2f2f !important;             /* calm red */
+}
+.action-icon {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  background: #f0f0f0 !important;
+  border: 1px solid #d6d6d6 !important;
+  color: #444 !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+.action-icon.gotit {
+  color: #2f7a3f !important;
+}
+
+.action-icon.edit {
+  color: #2f4f7a !important;
+}
+
+.action-icon.delete {
+  color: #7a2f2f !important;
+}
+/* RED DELETE BUTTON (same as online) */
+.manage-stores-dropdown .btn-danger {
+  background: #ff4d4d !important;     /* κόκκινο */
+  color: white !important;
+  border: 1px solid #cc3c3c !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+.manage-stores-dropdown .btn-danger:hover {
+  background: #e64545 !important;
+}
+
+.manage-stores-dropdown .btn-danger {
+  background: #ff4d4d !important;     /* κόκκινο */
+  color: white !important;
+  border: 1px solid #cc3c3c !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+}
+
+.manage-stores-dropdown .btn-danger:hover {
+  background: #e64545 !important;
+}
+
+.action-icon {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  background: #f0f0f0 !important;
+  border: 1px solid #d6d6d6 !important;
+  color: #444 !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+.action-icon.gotit {
+  color: #2f7a3f !important;
+}
+
+.action-icon.edit {
+  color: #2f4f7a !important;
+}
+
+.action-icon.delete {
+  color: #7a2f2f !important;
+}
+.manage-stores-dropdown .btn-danger {
+  background: #ff4d4d !important;
+  color: white !important;
+  border: 1px solid #cc3c3c !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+}
+
+.manage-stores-dropdown .btn-danger:hover {
+  background: #e64545 !important;
+}
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;       /* Μικρό gap */
+  margin-left: auto !important;
+}
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  margin-left: auto !important;
+}
+
+.action-icon {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  background: #f0f0f0 !important;
+  border: 1px solid #d6d6d6 !important;
+  color: #444 !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+.action-icon.gotit {
+  color: #597a2f !important;
+}
+
+.action-icon.edit {
+  color: #2f4f7a !important;
+}
+
+.action-icon.delete {
+  color: #7a2f2f !important;
+}
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;       /* ΜΙΚΡΟ gap */
+  margin-left: auto !important;
+  padding: 0 !important;     /* ΜΗΔΕΝ padding */
+}
+.card.list-item {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+.card {
+  padding: 8px !important;
+}
+.list-item {
+  min-height: unset !important;
+}
+.space-y-3 > * + * {
+  margin-top: 6px !important;
+}
+/* Μικραίνουμε το container των κουμπιών */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* Μικραίνουμε το card item */
+.card.list-item {
+  padding: 4px 6px !important;   /* ΜΙΚΡΟ padding */
+  min-height: unset !important;
+}
+
+/* Μικραίνουμε όλα τα cards */
+.card {
+  padding: 6px !important;
+}
+
+/* Μικραίνουμε το spacing ανάμεσα στα items */
+.space-y-3 > * + * {
+  margin-top: 4px !important;
+}
+
+/* Μικραίνουμε το left side */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+/* Μικραίνουμε το container των κουμπιών */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* Μικραίνουμε το card item */
+.card.list-item {
+  padding: 4px 6px !important;   /* ΜΙΚΡΟ padding */
+  min-height: unset !important;
+}
+
+/* Μικραίνουμε όλα τα cards */
+.card {
+  padding: 6px !important;
+}
+
+/* Μικραίνουμε το spacing ανάμεσα στα items */
+.space-y-3 > * + * {
+  margin-top: 4px !important;
+}
+
+/* Μικραίνουμε το left side */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+/* Μικραίνουμε το container των κουμπιών */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* Μικραίνουμε το card item ΠΟΛΥ */
+.card.list-item {
+  padding: 2px 4px !important;   /* ΠΟΛΥ μικρό padding */
+  min-height: unset !important;
+}
+
+/* Μικραίνουμε όλα τα cards */
+.card {
+  padding: 4px !important;       /* Μικρό padding */
+}
+
+/* Μικραίνουμε το spacing ανάμεσα στα items */
+.space-y-3 > * + * {
+  margin-top: 2px !important;    /* Μικρό spacing */
+}
+
+/* Μικραίνουμε το left side */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* Μικραίνουμε το κεντρικό κενό μέσα στο item */
+.list-item .flex.items-center {
+  gap: 4px !important;
+}
+
+/* Μικραίνουμε το container των κουμπιών ΠΟΛΥ */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;        /* Σχεδόν μηδέν */
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* Μικραίνουμε το card item ΠΟΛΥ */
+.card.list-item {
+  padding: 2px 4px !important;   /* ΠΟΛΥ μικρό padding */
+  min-height: unset !important;
+  line-height: 1 !important;     /* Μικρό ύψος γραμμής */
+}
+
+/* Μικραίνουμε όλα τα cards */
+.card {
+  padding: 4px !important;       /* Μικρό padding */
+}
+
+/* Μικραίνουμε το spacing ανάμεσα στα items */
+.space-y-3 > * + * {
+  margin-top: 2px !important;    /* Μικρό spacing */
+}
+
+/* Μικραίνουμε το left side */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* Μικραίνουμε το κεντρικό κενό μέσα στο item */
+.list-item .flex.items-center {
+  gap: 3px !important;
+}
+
+/* Μικραίνουμε το κείμενο */
+.list-item span {
+  font-size: 13px !important;
+}
+
+/* Μικραίνουμε το checkmark */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 14px !important;
+}
+
+/* Μικραίνουμε το όλο ύψος του item */
+.list-item {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* Μικραίνουμε το container των κουμπιών στο ελάχιστο */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* Μικραίνουμε το card item στο ελάχιστο */
+.card.list-item {
+  padding: 1px 3px !important;
+  min-height: unset !important;
+  line-height: 1.1 !important;
+}
+
+/* Μικραίνουμε όλα τα cards */
+.card {
+  padding: 3px !important;
+}
+
+/* Μικραίνουμε το spacing ανάμεσα στα items */
+.space-y-3 > * + * {
+  margin-top: 1px !important;
+}
+
+/* Μικραίνουμε το left side */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* Μικραίνουμε το κεντρικό κενό μέσα στο item */
+.list-item .flex.items-center {
+  gap: 2px !important;
+}
+
+/* Μικραίνουμε το κείμενο */
+.list-item span {
+  font-size: 12px !important;
+}
+
+/* Μικραίνουμε το checkmark */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 13px !important;
+}
+
+/* Μικραίνουμε το ύψος του item */
+.list-item {
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
+
+/* SUPER COMPACT ITEM */
+.card.list-item {
+  padding: 2px 6px !important;
+  min-height: unset !important;
+  line-height: 1.1 !important;
+}
+
+/* SUPER COMPACT CARD */
+.card {
+  padding: 4px !important;
+}
+
+/* SUPER COMPACT SPACING */
+.space-y-3 > * + * {
+  margin-top: 2px !important;
+}
+
+/* SUPER COMPACT LEFT SIDE */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* SUPER COMPACT CENTER GAP */
+.list-item .flex.items-center {
+  gap: 3px !important;
+}
+
+/* SMALL TEXT LIKE ONLINE */
+.list-item span {
+  font-size: 12px !important;
+}
+
+/* SMALL CHECKMARK */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 13px !important;
+}
+
+/* SMALL ITEM HEIGHT */
+.list-item {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* SMALL BUTTON CONTAINER */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* LIGHT GREEN BUTTON LIKE ONLINE */
+.action-icon.gotit {
+  color: #4CAF50 !important;
+  background: #E8F5E9 !important;
+  border-color: #C8E6C9 !important;
+}
+/* SUPER COMPACT ITEM */
+.card.list-item {
+  padding: 2px 6px !important;
+  min-height: unset !important;
+  line-height: 1.1 !important;
+}
+
+/* SUPER COMPACT CARD */
+.card {
+  padding: 4px !important;
+}
+
+/* SUPER COMPACT SPACING */
+.space-y-3 > * + * {
+  margin-top: 2px !important;
+}
+
+/* SUPER COMPACT LEFT SIDE */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* SUPER COMPACT CENTER GAP */
+.list-item .flex.items-center {
+  gap: 3px !important;
+}
+
+/* SMALL TEXT LIKE ONLINE */
+.list-item span {
+  font-size: 12px !important;
+}
+
+/* SMALL CHECKMARK */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 13px !important;
+}
+
+/* SMALL ITEM HEIGHT */
+.list-item {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* SMALL BUTTON CONTAINER */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* LIGHT GREEN BUTTON LIKE ONLINE */
+.action-icon.gotit {
+  color: #4CAF50 !important;
+  background: #E8F5E9 !important;
+  border-color: #C8E6C9 !important;
+}
+/* SUPER COMPACT ITEM */
+.card.list-item {
+  padding: 2px 6px !important;
+  min-height: unset !important;
+  line-height: 1.1 !important;
+}
+
+/* SUPER COMPACT CARD */
+.card {
+  padding: 4px !important;
+}
+
+/* SUPER COMPACT SPACING */
+.space-y-3 > * + * {
+  margin-top: 2px !important;
+}
+
+/* SUPER COMPACT LEFT SIDE */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* SUPER COMPACT CENTER GAP */
+.list-item .flex.items-center {
+  gap: 3px !important;
+}
+
+/* SMALL TEXT LIKE ONLINE */
+.list-item span {
+  font-size: 12px !important;
+}
+
+/* SMALL CHECKMARK */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 13px !important;
+}
+
+/* SMALL ITEM HEIGHT */
+.list-item {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* SMALL BUTTON CONTAINER */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* LIGHT GREEN BUTTON LIKE ONLINE */
+.action-icon.gotit {
+  color: #4CAF50 !important;
+  background: #E8F5E9 !important;
+  border-color: #C8E6C9 !important;
+}
+
+.action-icon.gotit {
+  background: #E8FFE8 !important;   /* ultra light mint */
+  color: #4CAF50 !important;         /* premium light green */
+  border-color: #C8F5C8 !important;  /* soft pastel border */
+}
+/* SUPER COMPACT ITEM */
+.card.list-item {
+  padding: 2px 6px !important;
+  min-height: unset !important;
+  line-height: 1.1 !important;
+}
+
+/* SUPER COMPACT CARD */
+.card {
+  padding: 4px !important;
+}
+
+/* SUPER COMPACT SPACING */
+.space-y-3 > * + * {
+  margin-top: 2px !important;
+}
+
+/* SUPER COMPACT LEFT SIDE */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* SUPER COMPACT CENTER GAP */
+.list-item .flex.items-center {
+  gap: 3px !important;
+}
+
+/* SMALL TEXT LIKE ONLINE */
+.list-item span {
+  font-size: 12px !important;
+}
+
+/* SMALL CHECKMARK */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 13px !important;
+}
+
+/* SMALL ITEM HEIGHT */
+.list-item {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* SMALL BUTTON CONTAINER */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* LIGHT GREEN LIKE ONLINE */
+.action-icon.gotit {
+  background: #E8FFE8 !important;   /* ultra light mint */
+  color: #4CAF50 !important;         /* premium light green */
+  border-color: #C8F5C8 !important;  /* soft pastel border */
+}
+
+/* === CARD ITEM (IDENTICAL TO ONLINE) === */
+.card.list-item {
+  padding: 2px 6px !important;
+  min-height: unset !important;
+  line-height: 1.05 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08) !important;
+}
+
+/* === CARD WRAPPER === */
+.card {
+  padding: 4px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06) !important;
+}
+
+/* === SPACING (IDENTICAL) === */
+.space-y-3 > * + * {
+  margin-top: 2px !important;
+}
+
+/* === LEFT SIDE (IDENTICAL) === */
+.list-item .flex.flex-col {
+  gap: 0px !important;
+}
+
+/* === CENTER GAP (IDENTICAL) === */
+.list-item .flex.items-center {
+  gap: 3px !important;
+}
+
+/* === TEXT SIZE (IDENTICAL) === */
+.list-item span {
+  font-size: 12px !important;
+  line-height: 1.1 !important;
+}
+
+/* === CHECKMARK (IDENTICAL) === */
+.list-item .text-green-600,
+.list-item .text-green-300 {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+/* === ITEM HEIGHT (IDENTICAL) === */
+.list-item {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* === BUTTON CONTAINER (IDENTICAL) === */
+.action-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1px !important;
+  margin-left: auto !important;
+  padding: 0 !important;
+}
+
+/* === BUTTONS (IDENTICAL) === */
+.action-icon {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 15px !important;
+  border: 1px solid #e0e0e0 !important;
+  background: #fafafa !important;
+  color: #444 !important;
+  transition: 0.15s ease-in-out !important;
+}
+
+/* === GOT IT BUTTON (PASTEL GREEN IDENTICAL) === */
+.action-icon.gotit {
+  background: #E8FFE8 !important;   /* ultra light mint */
+  color: #4CAF50 !important;         /* premium light green */
+  border-color: #C8F5C8 !important;  /* soft pastel border */
+}
+
+/* === EDIT BUTTON === */
+.action-icon.edit {
+  background: #F3F0FF !important;
+  color: #6A5ACD !important;
+  border-color: #DCD6FF !important;
+}
+
+/* === DELETE BUTTON === */
+.action-icon.delete {
+  background: #FFF0F0 !important;
+  color: #D9534F !important;
+  border-color: #F5C8C8 !important;
+}
+
+/* RESET — FIX BROKEN GLOBALS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* REMOVE THE BROKEN "padding: 2" */
+
+/* FORCE OVERRIDE AGAINST TAILWIND */
+.action-icon,
+.card,
+.btn,
+.input,
+.select {
+  all: unset !important;
+  display: revert !important;
+}
+
+/* HUGE ACTION BUTTONS */
+.action-icon {
+  width: 80px !important;
+  height: 80px !important;
+  min-width: 80px !important;
+  min-height: 80px !important;
+  border-radius: 50% !important;
+  font-size: 40px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* CARD */
+.card {
+  background: #fff !important;
+  border: 1px solid #e6d7ea !important;
+  border-radius: 12px !important;
+  padding: 14px !important;
+}
+
+/* INPUTS */
+.input {
+  padding: 10px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  border: 1px solid #dcdcdc !important;
+}
+
+/* PRODUCT ACTIONS */
+.product-actions {
+  display: flex !important;
+  gap: 12px !important;
+}

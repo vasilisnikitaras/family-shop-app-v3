@@ -1,0 +1,32 @@
+{
+  "title": "Perheen ostoslista",
+
+  "enter_code": "Syötä perhekoodi",
+  "family_code": "Perhekoodi...",
+  "enter_password": "Syötä salasana",
+  "password": "Salasana...",
+  "your_name": "Nimesi...",
+  "join_family": "Liity perheeseen",
+
+  "new_store": "Uuden kaupan nimi...",
+  "add_store": "Lisää kauppa",
+  "manage_stores": "Hallinnoi kauppoja",
+  "close": "Sulje",
+
+  "add_product": "Lisää tuote...",
+  "quantity": "Määrä",
+  "select_store": "Valitse kauppa",
+  "add": "Lisää",
+
+  "edit_item": "Muokkaa tuotetta",
+  "save": "Tallenna",
+  "cancel": "Peruuta",
+
+  "got_it": "Valmis",
+  "delete": "Poista",
+  "edit": "Muokkaa",
+
+  "store_view": "Kauppanäkymä",
+  "list_view": "Listanäkymä",
+  "added_by": "Lisännyt"
+}

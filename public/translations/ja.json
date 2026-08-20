@@ -1,0 +1,32 @@
+{
+  "title": "家族の買い物リスト",
+
+  "enter_code": "ファミリーコードを入力",
+  "family_code": "ファミリーコード...",
+  "enter_password": "パスワードを入力",
+  "password": "パスワード...",
+  "your_name": "あなたの名前...",
+  "join_family": "家族に参加",
+
+  "new_store": "新しい店舗名...",
+  "add_store": "店舗を追加",
+  "manage_stores": "店舗管理",
+  "close": "閉じる",
+
+  "add_product": "商品を追加...",
+  "quantity": "数量",
+  "select_store": "店舗を選択",
+  "add": "追加",
+
+  "edit_item": "商品を編集",
+  "save": "保存",
+  "cancel": "キャンセル",
+
+  "got_it": "完了",
+  "delete": "削除",
+  "edit": "編集",
+
+  "store_view": "店舗ビュー",
+  "list_view": "リストビュー",
+  "added_by": "追加者"
+}

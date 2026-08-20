@@ -1,0 +1,32 @@
+{
+  "title": "Lista de compras familiar",
+
+  "enter_code": "Ingrese el código familiar",
+  "family_code": "Código familiar...",
+  "enter_password": "Ingrese la contraseña",
+  "password": "Contraseña...",
+  "your_name": "Su nombre...",
+  "join_family": "Unirse a la familia",
+
+  "new_store": "Nombre de nueva tienda...",
+  "add_store": "Agregar tienda",
+  "manage_stores": "Administrar tiendas",
+  "close": "Cerrar",
+
+  "add_product": "Agregar producto...",
+  "quantity": "Cantidad",
+  "select_store": "Seleccionar tienda",
+  "add": "Agregar",
+
+  "edit_item": "Editar producto",
+  "save": "Guardar",
+  "cancel": "Cancelar",
+
+  "got_it": "Listo",
+  "delete": "Eliminar",
+  "edit": "Editar",
+
+  "store_view": "Vista por tienda",
+  "list_view": "Vista lista",
+  "added_by": "Agregado por"
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Lista della spesa familiare",
+
+  "enter_code": "Inserisci il codice famiglia",
+  "family_code": "Codice famiglia...",
+  "enter_password": "Inserisci la password",
+  "password": "Password...",
+  "your_name": "Il tuo nome...",
+  "join_family": "Unisciti alla famiglia",
+
+  "new_store": "Nome del nuovo negozio...",
+  "add_store": "Aggiungi negozio",
+  "manage_stores": "Gestisci negozi",
+  "close": "Chiudi",
+
+  "add_product": "Aggiungi prodotto...",
+  "quantity": "Quantità",
+  "select_store": "Seleziona negozio",
+  "add": "Aggiungi",
+
+  "edit_item": "Modifica prodotto",
+  "save": "Salva",
+  "cancel": "Annulla",
+
+  "got_it": "Fatto",
+  "delete": "Elimina",
+  "edit": "Modifica",
+
+  "store_view": "Vista negozio",
+  "list_view": "Vista lista",
+  "added_by": "Aggiunto da"
+}

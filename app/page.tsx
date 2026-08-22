@@ -36,18 +36,56 @@ export default function Page() {
   const [showEdit, setShowEdit] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // ⭐ REGISTER DEVICE — CLEAN VERSION
+  async function registerDevice() {
+  const family_code = localStorage.getItem("family_code");
+  const member_name = localStorage.getItem("user_name");
+  const device_name = localStorage.getItem("device_name") || "FamilyShop App";
+
+  if (!family_code || !member_name) {
+    console.log("❌ registerDevice skipped: missing family_code or user_name");
+    return;
+  }
+
+  await fetch("/api/registerDevice", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      family_code,
+      member_name,
+      device_name,
+    }),
+  });
+}
+
+  // ⭐ AUTO LOGIN + REGISTER DEVICE
   useEffect(() => {
-    const fc = localStorage.getItem("family_code");
-    const fp = localStorage.getItem("family_password");
-    const un = localStorage.getItem("user_name");
-    const fid = localStorage.getItem("family_id");
+  const fc = localStorage.getItem("family_code");
+  const fp = localStorage.getItem("family_password");
+  const un = localStorage.getItem("user_name");
+  const fid = localStorage.getItem("family_id");
 
-    if (fc) setFamilyCode(fc);
-    if (fp) setFamilyPassword(fp);
-    if (un) setUserName(un);
-    if (fid) setFamilyId(fid);
-  }, []);
+  if (fc) setFamilyCode(fc);
+  if (fp) setFamilyPassword(fp);
+  if (un) setUserName(un);
+  if (fid) setFamilyId(fid);
 
+  setItems([]);
+  setStores([]);
+
+  // ❗ FIX: ΜΗΝ τρέχει registerDevice χωρίς user
+  if (!fc || !un) {
+    console.log("❌ Auto-login: missing user_name → skipping registerDevice");
+    return;
+  }
+
+  registerDevice();   // ⭐ ΤΩΡΑ ΘΑ ΔΟΥΛΕΨΕΙ
+  loadItems();
+  loadStores();
+}, []);
+
+
+  // ⭐ HEIGHT FIX
   useEffect(() => {
     const handleResize = () => {
       document.documentElement.style.setProperty(
@@ -62,29 +100,12 @@ export default function Page() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  async function registerDevice() {
-    const family_code = localStorage.getItem("family_code");
-    const device_name = localStorage.getItem("device_name") || "FamilyShop App";
-    const member_name = localStorage.getItem("user_name");
-
-    if (!family_code || !member_name) return;
-
-    await fetch("/api/registerDevice", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        family_code,
-        device_name,
-        member_name,
-      }),
-    });
-  }
-
   const themeClass =
     theme === "dark"
       ? "bg-[#0b0b0b] text-[#f5f5f5]"
       : "bg-[#f3f4f6] text-[#1a1a1a]";
 
+  // ⭐ ONLINE STATUS (ping every 30s)
   useEffect(() => {
     if (!familyCode) return;
 
@@ -114,7 +135,6 @@ export default function Page() {
 
   // ⭐⭐⭐⭐⭐ FIXED — CLEAN VERSION
   async function handleSaveEdit(updated: any) {
-
     const family_code = localStorage.getItem("family_code");
 
     const res = await postJSON("/api/editItem", {
@@ -135,6 +155,7 @@ export default function Page() {
   // --------------------------------------
   // API POST
   // --------------------------------------
+
   const postJSON = async (url: string, body: any) => {
     const res = await fetch(url, {
       method: "POST",
@@ -227,6 +248,7 @@ export default function Page() {
 
     router.push("/");
   };
+  
 
   // --------------------------------------
   // AUTO LOGIN (SETTINGS FIX)

@@ -7,15 +7,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         min-h-screen
         w-full
         bg-gray-50
-        p-4 md:p-8
-        overflow-x-auto
+        p-0
+        m-0
       "
     >
       <div
         className="
           w-full
-          max-w-none
-          mx-auto
+          max-w-full
+          mx-0
         "
       >
         {children}

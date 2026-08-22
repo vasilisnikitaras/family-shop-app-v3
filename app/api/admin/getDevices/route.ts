@@ -11,19 +11,19 @@ export async function GET(req: Request) {
     let devices;
 
     if (!familyCode || familyCode.trim() === "") {
-      // 🔥 ΦΕΡΝΕΙ ΟΛΑ ΤΑ DEVICES
+      // 🔥 ΦΕΡΝΕΙ ΟΛΑ ΤΑ DEVICES ΑΠΟ devices_v2
       devices = await sql`
-        SELECT id, device_name, last_seen, is_online, family_code
-        FROM admin_devices
-        ORDER BY id ASC;
+        SELECT id, device_name, last_seen, is_online, family_code, member_name
+        FROM devices_v2
+        ORDER BY last_seen DESC;
       `;
     } else {
       // 🔥 ΦΕΡΝΕΙ ΜΟΝΟ ΤΗΣ ΟΙΚΟΓΕΝΕΙΑΣ
       devices = await sql`
-        SELECT id, device_name, last_seen, is_online, family_code
-        FROM admin_devices
+        SELECT id, device_name, last_seen, is_online, family_code, member_name
+        FROM devices_v2
         WHERE family_code = ${familyCode}
-        ORDER BY id ASC;
+        ORDER BY last_seen DESC;
       `;
     }
 

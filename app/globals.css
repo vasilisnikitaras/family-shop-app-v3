@@ -265,3 +265,23 @@ button {
   box-sizing: border-box;
 }
 
+
+
+
+/* Κάνε το main full width για ΟΛΟ το app */
+main {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.card {
+  width: 100%;
+  max-width: 100vw;
+}
+
+.table {
+  width: 100%;
+  min-width: 1000px; /* αν θες πιο φαρδύ */
+}

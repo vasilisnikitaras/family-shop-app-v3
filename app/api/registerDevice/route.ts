@@ -7,6 +7,13 @@ export async function POST(req: Request) {
   try {
     const { family_code, member_name, device_name } = await req.json();
 
+    // ⭐ DEBUG LOG — ΒΛΕΠΟΥΜΕ ΤΙ ΣΤΕΛΝΕΙ ΤΟ CLIENT
+    console.log("REGISTER JSON:", {
+      family_code,
+      member_name,
+      device_name
+    });
+
     if (!family_code || !member_name || !device_name) {
       return NextResponse.json(
         { success: false, message: "Missing fields" },

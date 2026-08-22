@@ -589,7 +589,8 @@ const [editItemData, setEditItemData] = useState({
 // --------------------------------------
 // OPEN EDIT MODAL (FIXED VERSION)
 // --------------------------------------
-const editItem = (item) => {
+const editItem = (item: any) => {
+
   // ⭐ STOP DOUBLE CALL
   if (editModal) return;
 

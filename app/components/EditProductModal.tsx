@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 
-// ⭐ FIX: ΔΕΝ ΣΒΗΝΩ ΤΙΠΟΤΑ — ΜΟΝΟ ΒΑΖΩ ΤΥΠΟ ΓΙΑ ΝΑ ΜΗΝ ΣΚΑΣΕΙ ΤΟ VERCEL
 export default function EditProductModal({ item, stores, onSave, onClose }: any) {
   const [name, setName] = useState(item.name);
   const [quantity, setQuantity] = useState(item.quantity);
@@ -44,7 +43,7 @@ export default function EditProductModal({ item, stores, onSave, onClose }: any)
       >
         {stores.map((s: any) => (
           <option key={s.id} value={s.id}>
-            {s.name}
+            {s.store_name}
           </option>
         ))}
       </select>

@@ -23,7 +23,8 @@ export async function POST(request: Request) {
     const stores = await sql`
       SELECT 
         id,
-        store_name AS name,
+        store_name,
+        store_name AS name,   -- 🔥 ΚΑΙ ΤΑ ΔΥΟ ΠΕΔΙΑ
         created_at,
         family_id
       FROM stores_v2

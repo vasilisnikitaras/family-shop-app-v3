@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "@/lib/useTranslation";
 import { useRouter } from "next/navigation";
 import { CheckIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import EditProductModal from "@/app/components/EditProductModal";
+// import EditProductModal from "@/app/components/EditProductModal"; //
 import VoiceAddItem from "@/app/components/VoiceAddItem";
 
 export default function Page() {
@@ -33,9 +33,13 @@ export default function Page() {
 
   const [viewMode, setViewMode] = useState<"list" | "store" | "manage">("list");
 
-  const [showEdit, setShowEdit] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  // const [showEdit, setShowEdit] = useState(false); //
+ // const [selectedItem, setSelectedItem] = useState(null); //
 
+
+
+
+ 
   // ⭐ REGISTER DEVICE — CLEAN VERSION
   async function registerDevice() {
   const family_code = localStorage.getItem("family_code");
@@ -132,25 +136,27 @@ export default function Page() {
       clearInterval(interval);
     };
   }, [familyCode]);
+// ❌ OLD EDIT FLOW — COMMENTED OUT (ΜΗΝ ΤΟ ΣΒΗΣΕΙΣ)
 
-  // ⭐⭐⭐⭐⭐ FIXED — CLEAN VERSION
-  async function handleSaveEdit(updated: any) {
-    const family_code = localStorage.getItem("family_code");
-
-    const res = await postJSON("/api/editItem", {
-      ...updated,
-      family_code,
-    });
-
-    if (!res.success) {
-      console.error("EDIT ERROR:", res.message);
-      alert("Failed to save changes");
-      return;
-    }
-
-    setShowEdit(false);
-    loadItems();
-  }
+//
+// async function handleSaveEdit(updated: any) {
+//   const family_code = localStorage.getItem("family_code");
+//
+//   const res = await postJSON("/api/editItem", {
+//     ...updated,
+//     family_code,
+//   });
+//
+//   if (!res.success) {
+//     console.error("EDIT ERROR:", res.message);
+//     alert("Failed to save changes");
+//     return;
+//   }
+//
+//   setShowEdit(false);
+//   loadItems();
+// }
+//
 
   // --------------------------------------
   // API POST
@@ -275,25 +281,29 @@ export default function Page() {
 }, []); // 🔥 ΟΧΙ [familyCode]
 
   // --------------------------------------
-  // LOAD ITEMS
-  // --------------------------------------
-  const loadItems = async () => {
-    if (!familyCode) return;
+// LOAD ITEMS (FIXED)
+// --------------------------------------
+const loadItems = async () => {
+  if (!familyCode) return;
 
-    const res = await postJSON("/api/getList", {
-      family_code: familyCode,
-    });
+  const res = await postJSON("/api/getList", {
+    family_code: familyCode,
+  });
 
-    const cloned = (res.items || []).map((x: any) => ({
-      ...x,
-      id: x.id,
-      is_checked: x.is_checked === true || x.is_checked === "true",
-      store_id: x.store_id ? String(x.store_id) : "",
-      added_by: x.added_by || "Unknown",
-    }));
+  // ⭐ ΕΔΩ ΒΑΖΕΙΣ ΤΟ LOG
+  console.log("ITEMS RAW:", res.items);
 
-    setItems(cloned);
-  };
+
+  const cloned = (res.items || []).map((x: any) => ({
+    ...x,
+    id: String(x.id),                // ⭐ ΠΑΝΤΑ STRING
+    store_id: String(x.store_id),    // ⭐ ΠΑΝΤΑ STRING
+    is_checked: x.is_checked === true || x.is_checked === "true",
+    added_by: x.added_by || "Unknown",
+  }));
+
+  setItems(cloned);
+};
 
   // --------------------------------------
   // LOAD STORES
@@ -563,20 +573,121 @@ for (let i = 0; i < tail.length; i++) {
 
 
   // --------------------------------------
-  // EDIT ITEM (PROMPT VERSION)
-  // --------------------------------------
-  const editItem = async (item: any) => {
-    const newName = prompt("New name:", item.name);
-    if (!newName) return;
+// EDIT MODAL STATE
+// --------------------------------------
+const [editModal, setEditModal] = useState(false);
+const [editItemData, setEditItemData] = useState({
+  id: "",
+  name: "",
+  quantity: "",
+  store_id: "",
+});
 
-    const res = await postJSON("/api/editItem", {
-      id: item.id,
-      name: newName,
-      family_code: familyCode,
-    });
+// --------------------------------------
+// OPEN EDIT MODAL (ΑΝΤΙΚΑΘΙΣΤΑ ΤΟ ΠΑΛΙΟ PROMPT)
+// --------------------------------------
+// --------------------------------------
+// OPEN EDIT MODAL (FIXED VERSION)
+// --------------------------------------
+const editItem = (item) => {
+  // ⭐ STOP DOUBLE CALL
+  if (editModal) return;
 
-    if (res.success) loadItems();
-  };
+  setEditItemData({
+    id: item.id,
+    name: item.name,
+    quantity: item.quantity,
+    store_id: String(item.store_id),
+  });
+
+  setEditModal(true);
+};
+
+// --------------------------------------
+// SAVE EDIT (FIXED VERSION)
+// --------------------------------------
+const saveEdit = async () => {
+  console.log("STORE ID BEFORE SAVE:", editItemData.store_id);
+
+  const res = await postJSON("/api/editItem", {
+    id: editItemData.id,
+    name: editItemData.name,
+    quantity: Number(editItemData.quantity),
+    store_id: editItemData.store_id,
+    family_code: familyCode,
+  });
+
+  if (!res.success) {
+    console.error("EDIT ERROR:", res);
+    return;
+  }
+
+  // ⭐ WAIT FOR DB TO FINISH WRITING
+  await new Promise((r) => setTimeout(r, 150));
+
+  // ⭐ RELOAD ITEMS BEFORE CLOSING MODAL
+  await loadItems();
+
+  // ⭐ NOW CLOSE MODAL
+  setEditModal(false);
+};
+
+// --------------------------------------
+// EDIT MODAL UI
+// --------------------------------------
+{editModal && (
+  <div className="modal-overlay">
+    <div className="modal card p-4 space-y-3">
+
+      <h2 className="section-title text-purple-700 dark:text-purple-300">
+        Edit Product
+      </h2>
+
+      <input
+        type="text"
+        className="input mb-2"
+        value={editItemData.name}
+        onChange={(e) =>
+          setEditItemData({ ...editItemData, name: e.target.value })
+        }
+      />
+
+      <input
+        type="number"
+        className="input mb-2"
+        value={editItemData.quantity}
+        onChange={(e) =>
+          setEditItemData({ ...editItemData, quantity: e.target.value })
+        }
+      />
+
+      <select
+        className="select mb-3"
+        value={editItemData.store_id}
+        onChange={(e) =>
+          setEditItemData({ ...editItemData, store_id: e.target.value })
+        }
+      >
+        {stores.map((s) => (
+          <option key={s.id} value={s.id}>
+            {s.name}
+          </option>
+        ))}
+      </select>
+
+      <button onClick={saveEdit} className="btn btn-purple w-full mb-2">
+        Save
+      </button>
+
+      <button
+        onClick={() => setEditModal(false)}
+        className="btn btn-danger w-full"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
 
   // --------------------------------------
   // DELETE ITEM
@@ -889,191 +1000,241 @@ for (let i = 0; i < tail.length; i++) {
 
 
         {/* STORE VIEW */}
-        {viewMode === "store" && (
-          <div className="w-full max-w-2xl mx-auto space-y-6">
-            {stores.map((store: any) => {
-              const storeItems = items.filter(
-                (i) => String(i.store_id) === String(store.id)
-              );
+{viewMode === "store" && (
+  <div className="w-full max-w-2xl mx-auto space-y-6">
+    {stores.map((store: any) => {
+      const storeItems = items.filter(
+        (i) => String(i.store_id) === String(store.id)
+      );
 
-              if (storeItems.length === 0) return null;
+      if (storeItems.length === 0) return null;
 
-              return (
+      return (
+        <div key={store.id} className="card space-y-3 store-section">
 
-                <div key={store.id} className="card space-y-3 store-section">
+          <h2 className="text-xl font-bold text-purple-700 dark:text-purple-300 pt-1 pb-1">
+            {store.name}
+          </h2>
 
-                  <h2 className="text-xl font-bold text-purple-700 dark:text-purple-300 pt-1 pb-1">
-                    {store.name}
-                  </h2>
+          <ul className="space-y-3">
+            {storeItems.map((i: any) => (
+              <li
+                key={i.id}
+                className={`card list-item px-4 py-3 transition-all pointer-events-auto ${
+                  i.is_checked && "bg-green-100 dark:bg-green-900"
+                }`}
+              >
 
-                  <ul className="space-y-3">
-                    {storeItems.map((i: any) => (
-                      <li
-                        key={i.id}
-                        className={`card list-item px-4 py-3 transition-all pointer-events-auto ${
-                          i.is_checked && "bg-green-100 dark:bg-green-900"
-                        }`}
-                      >
-
-                        {/* LEFT SIDE */}
-                        <div className="flex flex-col gap-1 w-full">
-                          <div className="flex items-center gap-2">
-                            {i.is_checked && (
-                              <span className="text-green-600 dark:text-green-300 font-bold">
-                                ✔
-                              </span>
-                            )}
-
-                            <span
-                              className={`text-sm font-medium ${
-                                i.is_checked
-                                  ? "line-through text-gray-700 dark:text-gray-300"
-                                  : ""
-                              }`}
-                            >
-                              {i.name} (x{i.quantity})
-                            </span>
-                          </div>
-
-                          <span className="text-xs text-gray-500 dark:text-gray-300 mt-[3px] block">
-                            {store.name} — Added by: {i.added_by}
-                          </span>
-                        </div>
-
-                        {/* RIGHT SIDE */}
-                        <div className="flex flex-col gap-3 ml-auto">
-
-                          <button
-                            onClick={() => toggleGotIt(i)}
-                            className="w-10 h-10 flex items-center justify-center 
-                            rounded-full bg-white text-green-600 border border-green-300
-                            hover:bg-green-50 active:scale-95 transition-all"
-                          >
-                            ✔️
-                          </button>
-
-                          <button
-                            onClick={() => {
-                              setSelectedItem(i);
-                              setShowEdit(true);
-                            }}
-                            className="w-10 h-10 flex items-center justify-center 
-                            rounded-full bg-white text-blue-600 border border-blue-300
-                            hover:bg-blue-50 active:scale-95 transition-all"
-                          >
-                            ✏️
-                          </button>
-
-                          <button
-                            onClick={() => deleteItem(i)}
-                            className="w-10 h-10 flex items-center justify-center 
-                            rounded-full bg-white text-red-600 border border-red-300
-                            hover:bg-red-50 active:scale-95 transition-all"
-                          >
-                            🗑️
-                          </button>
-
-                        </div>
-
-                      </li>
-                    ))}
-                  </ul>
-
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* LIST VIEW */}
-        {viewMode === "list" && (
-          <div className="space-y-3 w-full max-w-2xl mx-auto">
-            <h2 className="section-title text-purple-700 dark:text-purple-300">
-              {t.list}
-            </h2>
-
-            <ul className="space-y-3">
-              {items.map((i: any) => (
-                <li
-                  key={i.id}
-                  className={`card list-item px-4 py-3 transition-all pointer-events-auto flex items-start gap-3 ${
-                    i.is_checked && "bg-green-100 dark:bg-green-900"
-                  }`}
-                >
-
-                  {/* LEFT SIDE */}
-                  <div className="flex flex-col gap-1 w-full">
-                    <div className="flex items-center gap-2">
-                      {i.is_checked && (
-                        <span className="text-green-600 font-bold">✔</span>
-                      )}
-
-                      <span
-                        className={`text-sm font-medium ${
-                          i.is_checked
-                            ? "line-through text-green-900 dark:text-green-200"
-                            : ""
-                        }`}
-                      >
-                        {i.name} (x{i.quantity})
+                {/* LEFT SIDE */}
+                <div className="flex flex-col gap-1 w-full">
+                  <div className="flex items-center gap-2">
+                    {i.is_checked && (
+                      <span className="text-green-600 dark:text-green-300 font-bold">
+                        ✔
                       </span>
-                    </div>
+                    )}
 
-                    <span className="text-xs text-gray-500 dark:text-gray-300 mt-[3px] block">
-                      {i.store} — Added by: {i.added_by}
+                    <span
+                      className={`text-sm font-medium ${
+                        i.is_checked
+                          ? "line-through text-gray-700 dark:text-gray-300"
+                          : ""
+                      }`}
+                    >
+                      {i.name} (x{i.quantity})
                     </span>
                   </div>
 
-                  {/* RIGHT SIDE */}
-                  <div className="flex flex-col gap-3 ml-auto">
+                  <span className="text-xs text-gray-500 dark:text-gray-300 mt-[3px] block">
+                    {store.name} — Added by: {i.added_by}
+                  </span>
+                </div>
 
-                    <button
-                      onClick={() => toggleGotIt(i)}
-                      className="w-10 h-10 flex items-center justify-center 
-                      rounded-full bg-white text-green-600 border border-green-300
-                      hover:bg-green-50 active:scale-95 transition-all"
-                    >
-                      ✔️
-                    </button>
+                {/* RIGHT SIDE */}
+                <div className="flex flex-col gap-3 ml-auto">
 
-                    <button
-                      onClick={() => {
-                        setSelectedItem(i);
-                        setShowEdit(true);
-                      }}
-                      className="w-10 h-10 flex items-center justify-center 
-                      rounded-full bg-white text-blue-600 border border-blue-300
-                      hover:bg-blue-50 active:scale-95 transition-all"
-                    >
-                      ✏️
-                    </button>
+                  <button
+                    onClick={() => toggleGotIt(i)}
+                    className="w-10 h-10 flex items-center justify-center 
+                    rounded-full bg-white text-green-600 border border-green-300
+                    hover:bg-green-50 active:scale-95 transition-all"
+                  >
+                    ✔️
+                  </button>
 
-                    <button
-                      onClick={() => deleteItem(i)}
-                      className="w-10 h-10 flex items-center justify-center 
-                      rounded-full bg-white text-red-600 border border-red-300
-                      hover:bg-red-50 active:scale-95 transition-all"
-                    >
-                      🗑️
-                    </button>
+                  {/* NEW EDIT BUTTON */}
+                  <button
+                    onClick={() => editItem(i)}
+                    className="w-10 h-10 flex items-center justify-center 
+                    rounded-full bg-white text-blue-600 border border-blue-300
+                    hover:bg-blue-50 active:scale-95 transition-all"
+                  >
+                    ✏️
+                  </button>
 
-                  </div>
+                  <button
+                    onClick={() => deleteItem(i)}
+                    className="w-10 h-10 flex items-center justify-center 
+                    rounded-full bg-white text-red-600 border border-red-300
+                    hover:bg-red-50 active:scale-95 transition-all"
+                  >
+                    🗑️
+                  </button>
 
-                </li>
-              ))}
-            </ul>
+                </div>
+
+              </li>
+            ))}
+          </ul>
+
+        </div>
+      );
+    })}
+  </div>
+)}
+
+{/* LIST VIEW */}
+{viewMode === "list" && (
+  <div className="space-y-3 w-full max-w-2xl mx-auto">
+    <h2 className="section-title text-purple-700 dark:text-purple-300">
+      {t.list}
+    </h2>
+
+    <ul className="space-y-3">
+      {items.map((i: any) => (
+        <li
+          key={i.id}
+          className={`card list-item px-4 py-3 transition-all pointer-events-auto flex items-start gap-3 ${
+            i.is_checked && "bg-green-100 dark:bg-green-900"
+          }`}
+        >
+
+          {/* LEFT SIDE */}
+          <div className="flex flex-col gap-1 w-full">
+            <div className="flex items-center gap-2">
+              {i.is_checked && (
+                <span className="text-green-600 font-bold">✔</span>
+              )}
+
+              <span
+                className={`text-sm font-medium ${
+                  i.is_checked
+                    ? "line-through text-green-900 dark:text-green-200"
+                    : ""
+                }`}
+              >
+                {i.name} (x{i.quantity})
+              </span>
+            </div>
+
+            <span className="text-xs text-gray-500 dark:text-gray-300 mt-[3px] block">
+              {i.store} — Added by: {i.added_by}
+            </span>
           </div>
-        )}
 
-        {/* EDIT MODAL */}
-        {showEdit && selectedItem && (
-          <EditProductModal
-            item={selectedItem}
-            stores={stores}
-            onSave={handleSaveEdit}
-            onClose={() => setShowEdit(false)}
-          />
-        )}
+          {/* RIGHT SIDE */}
+          <div className="flex flex-col gap-3 ml-auto">
+
+            <button
+              onClick={() => toggleGotIt(i)}
+              className="w-10 h-10 flex items-center justify-center 
+              rounded-full bg-white text-green-600 border border-green-300
+              hover:bg-green-50 active:scale-95 transition-all"
+            >
+              ✔️
+            </button>
+
+            {/* NEW EDIT BUTTON */}
+            <button
+              onClick={() => editItem(i)}
+              className="w-10 h-10 flex items-center justify-center 
+              rounded-full bg-white text-blue-600 border border-blue-300
+              hover:bg-blue-50 active:scale-95 transition-all"
+            >
+              ✏️
+            </button>
+
+            <button
+              onClick={() => deleteItem(i)}
+              className="w-10 h-10 flex items-center justify-center 
+              rounded-full bg-white text-red-600 border border-red-300
+              hover:bg-red-50 active:scale-95 transition-all"
+            >
+              🗑️
+            </button>
+
+          </div>
+
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+
+       {/* EDIT MODAL — NEW */}
+{editModal && (
+  <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="modal card p-4 space-y-3 w-full max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+
+      <h2 className="section-title text-purple-700 dark:text-purple-300 text-lg font-bold">
+        Edit Product
+      </h2>
+
+      {/* NAME */}
+      <input
+        type="text"
+        className="input mb-2 w-full p-2 border rounded"
+        value={editItemData.name}
+        onChange={(e) =>
+          setEditItemData({ ...editItemData, name: e.target.value })
+        }
+      />
+
+      {/* QUANTITY */}
+      <input
+        type="number"
+        className="input mb-2 w-full p-2 border rounded"
+        value={editItemData.quantity}
+        onChange={(e) =>
+          setEditItemData({ ...editItemData, quantity: e.target.value })
+        }
+      />
+
+      {/* STORE SELECT */}
+      <select
+        className="select mb-3 w-full p-2 border rounded"
+        value={editItemData.store_id}
+        onChange={(e) =>
+          setEditItemData({ ...editItemData, store_id: e.target.value })
+        }
+      >
+        {stores.map((s) => (
+          <option key={s.id} value={s.id}>
+            {s.name}
+          </option>
+        ))}
+      </select>
+
+      {/* SAVE BUTTON */}
+      <button
+        onClick={saveEdit}
+        className="btn btn-purple w-full p-2 rounded bg-purple-600 text-white font-semibold hover:bg-purple-700"
+      >
+        Save
+      </button>
+
+      {/* CLOSE BUTTON */}
+      <button
+        onClick={() => setEditModal(false)}
+        className="btn btn-danger w-full p-2 rounded bg-red-600 text-white font-semibold hover:bg-red-700"
+      >
+        Close
+      </button>
+
+    </div>
+  </div>
+)}
 
         {/* FOOTER */}
         <footer className="text-center text-sm opacity-70 mt-10">

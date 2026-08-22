@@ -3,9 +3,9 @@ import { sql } from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
-    const { id, name, quantity, store_id, family_code } = await request.json();
+    const { id, name, quantity, store_id } = await request.json();
 
-    if (!id || !name || !quantity || !store_id || !family_code) {
+    if (!id || !name || !quantity || !store_id) {
       return NextResponse.json(
         { success: false, message: "Missing fields" },
         { status: 400 }
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
         name = ${name},
         quantity = ${quantity},
         store_id = ${store_id}
-      WHERE id = ${id} AND family_code = ${family_code}
+      WHERE id = ${id}
     `;
 
     return NextResponse.json({ success: true });

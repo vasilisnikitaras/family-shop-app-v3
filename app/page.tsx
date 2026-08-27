@@ -729,29 +729,29 @@ const saveEdit = async () => {
   }, [familyCode]);
 
   // --------------------------------------
-  // AUTO REFRESH ITEMS
-  // --------------------------------------
-  useEffect(() => {
-    const interval = setInterval(() => {
-      loadItems();
-    }, 3000);
+// AUTO REFRESH ITEMS
+// --------------------------------------
+useEffect(() => {
+  const interval = setInterval(() => {
+    loadItems();
+  }, 3000);
 
-    return () => clearInterval(interval);
-  }, []);
+  return () => clearInterval(interval);
+}, []);
 
-  // --------------------------------------
-  // AUTO REFRESH ITEMS & STORES
-  // --------------------------------------
-  useEffect(() => {
-    if (!familyCode) return;
+// --------------------------------------
+// AUTO REFRESH ITEMS & STORES (FIXED)
+// --------------------------------------
+useEffect(() => {
+  if (!familyCode) return;
 
-    const interval = setInterval(() => {
-      loadItems();
-      loadStores();
-    }, 3000);
+  // ⭐ FIX: ΜΟΝΟ loadStores κάθε 10s για να ΜΗΝ ΣΒΗΝΕΙ ΤΟ STATE
+  const interval = setInterval(() => {
+    loadStores();
+  }, 10000);
 
-    return () => clearInterval(interval);
-  }, [familyCode]);
+  return () => clearInterval(interval);
+}, [familyCode]);
 
   // --------------------------------------
   // LOGIN SCREEN

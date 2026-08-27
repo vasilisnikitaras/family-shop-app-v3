@@ -338,33 +338,26 @@ const loadItems = async () => {
     setStores([]);
   };
 
- const addStore = async () => {
-  if (!newStoreName.trim()) return;
+  // --------------------------------------
+  // ADD STORE
+  // --------------------------------------
+  const addStore = async () => {
+    if (!newStoreName.trim()) return;
 
-  const res = await fetch("/api/addStore", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-family-code": familyCode || ""
-    },
-    body: JSON.stringify({
+    const res = await postJSON("/api/addStore", {
       name: newStoreName.trim(),
-      family_id: familyId,      // ⭐ ΒΑΛΤΟ ΠΙΣΩ
-      added_by: userName        // ⭐ optional αλλά βοηθάει
-    })
-  });
+      family_id: familyId,
+      family_code: familyCode,
+      user_name: userName,
+    });
 
-  const data = await res.json();
-
-  if (data.success) {
-    setNewStoreName("");
-    loadStores();
-  } else {
-    alert(data.message);
-  }
-};
-
-
+    if (res.success) {
+      setNewStoreName("");
+      loadStores();
+    } else {
+      alert(res.message);
+    }
+  };
 
 // --------------------------------------
 // DELETE STORE
@@ -729,29 +722,29 @@ const saveEdit = async () => {
   }, [familyCode]);
 
   // --------------------------------------
-// AUTO REFRESH ITEMS
-// --------------------------------------
-useEffect(() => {
-  const interval = setInterval(() => {
-    loadItems();
-  }, 3000);
+  // AUTO REFRESH ITEMS
+  // --------------------------------------
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadItems();
+    }, 3000);
 
-  return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(interval);
+  }, []);
 
-// --------------------------------------
-// AUTO REFRESH ITEMS & STORES (FIXED)
-// --------------------------------------
-useEffect(() => {
-  if (!familyCode) return;
+  // --------------------------------------
+  // AUTO REFRESH ITEMS & STORES
+  // --------------------------------------
+  useEffect(() => {
+    if (!familyCode) return;
 
-  // ⭐ FIX: ΜΟΝΟ loadStores κάθε 10s για να ΜΗΝ ΣΒΗΝΕΙ ΤΟ STATE
-  const interval = setInterval(() => {
-    loadStores();
-  }, 10000);
+    const interval = setInterval(() => {
+      loadItems();
+      loadStores();
+    }, 3000);
 
-  return () => clearInterval(interval);
-}, [familyCode]);
+    return () => clearInterval(interval);
+  }, [familyCode]);
 
   // --------------------------------------
   // LOGIN SCREEN
@@ -1261,4 +1254,3 @@ useEffect(() => {
     </div>
   );
 }
-

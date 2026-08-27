@@ -3,17 +3,9 @@ import { sql } from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
-    // ⭐ FIX: Accept ANY field name from frontend
-    const body = await request.json();
-    const name =
-      body?.name ||
-      body?.store_name ||
-      body?.value ||
-      body?.text ||
-      body?.store ||
-      "";
+    const { name } = await request.json();
 
-    if (!name || name.trim() === "") {
+    if (!name) {
       return NextResponse.json(
         { success: false, message: "Missing store name" },
         { status: 400 }

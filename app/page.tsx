@@ -339,25 +339,32 @@ const loadItems = async () => {
   };
 
   // --------------------------------------
-  // ADD STORE
-  // --------------------------------------
-  const addStore = async () => {
-    if (!newStoreName.trim()) return;
+// ADD STORE (FIXED)
+// --------------------------------------
+const addStore = async () => {
+  if (!newStoreName.trim()) return;
 
-    const res = await postJSON("/api/addStore", {
-      name: newStoreName.trim(),
-      family_id: familyId,
-      family_code: familyCode,
-      user_name: userName,
-    });
+  const res = await fetch("/api/addStore", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-family-code": familyCode || ""
+    },
+    body: JSON.stringify({
+      name: newStoreName.trim()
+    })
+  });
 
-    if (res.success) {
-      setNewStoreName("");
-      loadStores();
-    } else {
-      alert(res.message);
-    }
-  };
+  const data = await res.json();
+
+  if (data.success) {
+    setNewStoreName("");
+    loadStores();
+  } else {
+    alert(data.message);
+  }
+};
+
 
 // --------------------------------------
 // DELETE STORE

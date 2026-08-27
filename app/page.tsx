@@ -338,10 +338,7 @@ const loadItems = async () => {
     setStores([]);
   };
 
-  // --------------------------------------
-// ADD STORE (FIXED)
-// --------------------------------------
-const addStore = async () => {
+ const addStore = async () => {
   if (!newStoreName.trim()) return;
 
   const res = await fetch("/api/addStore", {
@@ -351,7 +348,9 @@ const addStore = async () => {
       "x-family-code": familyCode || ""
     },
     body: JSON.stringify({
-      name: newStoreName.trim()
+      name: newStoreName.trim(),
+      family_id: familyId,      // ⭐ ΒΑΛΤΟ ΠΙΣΩ
+      added_by: userName        // ⭐ optional αλλά βοηθάει
     })
   });
 
@@ -364,6 +363,7 @@ const addStore = async () => {
     alert(data.message);
   }
 };
+
 
 
 // --------------------------------------

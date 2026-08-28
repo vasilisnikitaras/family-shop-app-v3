@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const { ids } = await req.json();
 
-    console.log("IDS RECEIVED:", ids);   // ← ← ← Fanene, EDW !!!
+    console.log("IDS RECEIVED:", ids);   // ← Fanene, EDW !!!
 
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
       return NextResponse.json({ error: "Missing ids array" }, { status: 400 });
@@ -18,7 +18,12 @@ export async function POST(req: Request) {
       WHERE id::text = ANY(string_to_array(${ids.join(',')}, ','));
     `;
 
-    return NextResponse.json({ success: true, deleted: ids.length });
+    return NextResponse.json({
+      success: true,
+      deleted: ids.length,
+      received: ids,   // ← Fanene, EDW !!!
+    });
+
   } catch (error) {
     console.error("Bulk delete error:", error);
     return NextResponse.json({ error: "Failed to bulk delete devices" }, { status: 500 });

@@ -11,10 +11,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing ids array" }, { status: 400 });
     }
 
+    const cleanIds = ids.map((id: any) => Number(id));
+
     await sql`
       DELETE FROM devices
-      WHERE id IN (${ids});
+      WHERE id IN (${cleanIds});
     `;
+
 
     return NextResponse.json({
       success: true,

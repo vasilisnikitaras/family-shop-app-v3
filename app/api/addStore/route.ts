@@ -7,6 +7,8 @@ export async function POST(request: Request) {
   try {
     const { name } = await request.json();
 
+    console.log("📌 Incoming store name:", name);
+
     if (!name) {
       return NextResponse.json(
         { success: false, message: "Missing store name" },
@@ -15,6 +17,7 @@ export async function POST(request: Request) {
     }
 
     const familyCode = request.headers.get("x-family-code");
+    console.log("📌 Incoming family code:", familyCode);
 
     if (!familyCode) {
       return NextResponse.json(
@@ -23,9 +26,13 @@ export async function POST(request: Request) {
       );
     }
 
+    console.log("📌 Checking family:", familyCode);
+
     const family = await sql`
       SELECT id FROM families WHERE family_code = ${familyCode}
     `;
+
+    console.log("📌 Family result:", family);
 
     if (family.length === 0) {
       return NextResponse.json(
@@ -38,18 +45,30 @@ export async function POST(request: Request) {
 
     const cleanName = name.trim().toLowerCase();
 
-    const existingStore = await sql`
-      SELECT id FROM stores_v2
+    console.log("📌 Family ID:", family_id);
+    console.log("📌 Clean name:", cleanName);
+
+    // FIX: remove LOWER/TRIM from SQL
+    const stores = await sql`
+      SELECT id, store_name FROM stores_v2
       WHERE family_id = ${family_id}
-      AND LOWER(TRIM(store_name)) = ${cleanName}
     `;
 
-    if (existingStore.length > 0) {
+    console.log("📌 Existing stores:", stores);
+
+    const match = stores.find(
+      s => s.store_name.trim().toLowerCase() === cleanName
+    );
+
+    if (match) {
+      console.log("📌 Store already exists:", match);
       return NextResponse.json(
-        { success: true, store: existingStore[0] },
+        { success: true, store: match },
         { status: 200 }
       );
     }
+
+    console.log("📌 Inserting store:", name.trim(), family_id, familyCode);
 
     const store = await sql`
       INSERT INTO stores_v2 (store_name, family_id, family_code)
@@ -57,10 +76,12 @@ export async function POST(request: Request) {
       RETURNING id, store_name
     `;
 
+    console.log("📌 Store inserted:", store);
+
     return NextResponse.json({ success: true, store: store[0] });
 
   } catch (error) {
-    console.error("Error adding store:", error);
+    console.error("🔥 ADD STORE ERROR:", error);
     return NextResponse.json(
       { success: false, message: "Failed to add store" },
       { status: 500 }

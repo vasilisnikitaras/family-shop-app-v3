@@ -11,6 +11,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing ids array" }, { status: 400 });
     }
 
+    // 🔥 FIX: Convert string IDs → numbers
     const cleanIds = ids.map((id: any) => Number(id));
 
     await sql`
@@ -18,11 +19,10 @@ export async function POST(req: Request) {
       WHERE id IN (${cleanIds});
     `;
 
-
     return NextResponse.json({
       success: true,
-      deleted: ids.length,
-      received: ids
+      deleted: cleanIds.length,
+      received: cleanIds
     });
 
   } catch (error: any) {

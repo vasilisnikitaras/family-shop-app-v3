@@ -5,15 +5,15 @@ const sql = neon(process.env.DATABASE_URL!);
 
 export async function POST(req: Request) {
   try {
-    const { device_id } = await req.json();
+    const { id } = await req.json();   // <-- FIXED (όχι device_id)
 
-    if (!device_id) {
-      return NextResponse.json({ error: "Missing device_id" }, { status: 400 });
+    if (!id) {
+      return NextResponse.json({ error: "Missing id" }, { status: 400 });
     }
 
     await sql`
       DELETE FROM devices
-      WHERE id = ${device_id};
+      WHERE id = ${id};
     `;
 
     return NextResponse.json({ success: true });

@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     await sql`
       DELETE FROM devices
-      WHERE id = ANY(${ids}::int[]);
+      WHERE id IN (SELECT UNNEST(${ids}::int[]));
     `;
 
     return NextResponse.json({ success: true, deleted: ids.length });

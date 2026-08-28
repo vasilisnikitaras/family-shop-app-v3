@@ -13,13 +13,13 @@ export async function POST(req: Request) {
 
     await sql`
       DELETE FROM devices
-      WHERE id::text = ANY(string_to_array(${ids.join(',')}, ','));
+      WHERE id IN (SELECT UNNEST(ARRAY[${ids.join(',')}]));
     `;
 
     return NextResponse.json({
       success: true,
       deleted: ids.length,
-      received: ids   // ❤️ Fanene, EDW tha deis ti ftanei
+      received: ids
     });
 
   } catch (error) {

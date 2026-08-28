@@ -22,7 +22,11 @@ export async function POST(req: Request) {
       received: ids
     });
 
-  } catch (error) {
-    return NextResponse.json({ error: "Failed to bulk delete devices" }, { status: 500 });
+  } catch (error: any) {
+    console.error("Bulk delete error:", error);
+    return NextResponse.json(
+      { error: error?.message || "Unknown SQL error" },
+      { status: 500 }
+    );
   }
 }

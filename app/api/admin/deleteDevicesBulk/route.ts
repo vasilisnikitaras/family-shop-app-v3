@@ -7,6 +7,8 @@ export async function POST(req: Request) {
   try {
     const { ids } = await req.json();
 
+    console.log("IDS RECEIVED:", ids);   // ← ← ← Fanene, EDW !!!
+
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
       return NextResponse.json({ error: "Missing ids array" }, { status: 400 });
     }

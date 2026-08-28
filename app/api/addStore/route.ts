@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
 
@@ -34,7 +36,6 @@ export async function POST(request: Request) {
 
     const family_id = family[0].id;
 
-    // ⭐ NORMALIZE CHECK
     const cleanName = name.trim().toLowerCase();
 
     const existingStore = await sql`
@@ -44,14 +45,12 @@ export async function POST(request: Request) {
     `;
 
     if (existingStore.length > 0) {
-  return NextResponse.json(
-    { success: true, store: existingStore[0] },
-    { status: 200 }
-  );
-}
+      return NextResponse.json(
+        { success: true, store: existingStore[0] },
+        { status: 200 }
+      );
+    }
 
-
-    // ⭐ INSERT (με trim)
     const store = await sql`
       INSERT INTO stores_v2 (store_name, family_id, family_code)
       VALUES (${name.trim()}, ${family_id}, ${familyCode})

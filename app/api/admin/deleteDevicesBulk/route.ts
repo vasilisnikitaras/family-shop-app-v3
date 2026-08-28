@@ -13,7 +13,9 @@ export async function POST(req: Request) {
 
     await sql`
       DELETE FROM devices
-      WHERE id IN (SELECT UNNEST(ARRAY[${ids.join(',')}]));
+      WHERE id IN (
+        SELECT UNNEST(ARRAY[${ids.join(',')} ]::int[])
+      );
     `;
 
     return NextResponse.json({

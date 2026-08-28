@@ -44,11 +44,12 @@ export async function POST(request: Request) {
     `;
 
     if (existingStore.length > 0) {
-      return NextResponse.json(
-        { success: false, message: "Store already exists" },
-        { status: 200 }
-      );
-    }
+  return NextResponse.json(
+    { success: true, store: existingStore[0] },
+    { status: 200 }
+  );
+}
+
 
     // ⭐ INSERT (με trim)
     const store = await sql`

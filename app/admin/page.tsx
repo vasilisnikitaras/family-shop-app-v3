@@ -250,19 +250,23 @@ export default function AdminPage() {
     loadDevices();
   };
 
-  const deleteSelectedDevices = async () => {
-    if (selectedDevices.length === 0) return;
+ const deleteSelectedDevices = async () => {
+  if (selectedDevices.length === 0) return;
 
-    if (!window.confirm(`Delete ${selectedDevices.length} devices?`)) return;
+  if (!window.confirm(`Delete ${selectedDevices.length} devices?`)) return;
 
-    await fetch("/api/admin/deleteDevicesBulk", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ids: selectedDevices }),
-    });
+  // 🔥 FIX: convert string IDs → numbers
+  const cleanIds = selectedDevices.map((id) => Number(id));
 
-    loadDevices();
-  };
+  await fetch("/api/admin/deleteDevicesBulk", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ids: cleanIds }),
+  });
+
+  loadDevices();
+};
+
 
   function selectAllDevices() {
     setSelectedDevices(filteredDevices.map((d) => d.id));

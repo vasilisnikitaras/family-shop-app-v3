@@ -250,12 +250,11 @@ export default function AdminPage() {
     loadDevices();
   };
 
- const deleteSelectedDevices = async () => {
+const deleteSelectedDevices = async () => {
   if (selectedDevices.length === 0) return;
 
   if (!window.confirm(`Delete ${selectedDevices.length} devices?`)) return;
 
-  // 🔥 FIX: convert string IDs → numbers
   const cleanIds = selectedDevices.map((id) => Number(id));
 
   await fetch("/api/admin/deleteDevicesBulk", {
@@ -264,7 +263,14 @@ export default function AdminPage() {
     body: JSON.stringify({ ids: cleanIds }),
   });
 
-  loadDevices();
+  // 🔥 FIX: reset filter so deleted devices disappear
+  setSelectedFamily("");
+
+  // 🔥 FIX: reload full list
+  await loadDevices();
+
+  // Clear selection
+  setSelectedDevices([]);
 };
 
 

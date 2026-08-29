@@ -11,12 +11,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing ids array" }, { status: 400 });
     }
 
-    // 🔥 FIX: Convert string IDs → numbers
     const cleanIds = ids.map((id: any) => Number(id));
 
     await sql`
       DELETE FROM devices
-      WHERE id IN (${cleanIds});
+      WHERE id = ANY(${cleanIds});
     `;
 
     return NextResponse.json({

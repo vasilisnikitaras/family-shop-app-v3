@@ -21,9 +21,8 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       deleted: cleanIds.length,
-      received: cleanIds
+      ids: cleanIds
     });
-
   } catch (error: any) {
     console.error("Bulk delete error:", error);
     return NextResponse.json(
